@@ -1,0 +1,9 @@
+-- Create table for Export Civis Data to NGPVAN to upload new cell numbers into VAN	(MyC)
+--		Table containing new cell phones: michigan.tsmart_export_cells_append_20200513
+-- 		Response table: michigan.response_CellsToVAN_200521
+
+select distinct t1.myc_van_id as vanid, --need to rename as vanid?
+                                t1.voterbase_phone_wireless as cell_phone
+from michigan.tsmart_export_cells_append_20200513 as t1
+
+where t1.myc_van_id is not null and t1.voterbase_phone_wireless is not null;
