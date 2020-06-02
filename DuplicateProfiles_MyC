@@ -1,0 +1,27 @@
+-- create table showind duplicate records & the number of duplicates
+select firstname, lastname, city, zip5, count(*)
+from (
+  select * from ot2020_vansync.tsm_csi_contacts_myc as t1
+  
+  where t1.vanid not in (
+    select t2.dupvanid from ot2020_vansync.tsm_csi_contactsdeduped as t2
+  )
+  and t1.statecode = 'MI'
+)
+
+group by firstname, lastname, city, zip5
+having count(*) > 1
+
+-- count length of above table:
+select count(*) from (
+  select firstname, lastname, city, zip5, count(*)
+  from (
+    select * from ot2020_vansync.tsm_csi_contacts_myc as t1
+    where t1.vanid not in (
+      select t2.dupvanid from ot2020_vansync.tsm_csi_contactsdeduped as t2
+    )
+    and t1.statecode = 'MI'
+  )
+  group by firstname, lastname, city, zip5
+  having count(*) > 1
+)
