@@ -1,0 +1,5 @@
+-- how to share schemas / tables in Civis
+
+GRANT USAGE ON SCHEMA [schema name] TO GROUP [group name];
+
+GRANT SELECT ON ALL TABLES IN SCHEMA [schema name] TO GROUP [group name];
