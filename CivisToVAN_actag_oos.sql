@@ -2,7 +2,7 @@
 -- NOT RUN in this script -> copy-pasted into Export Script as a select statement
 
 select t1.vanid as van_id,
-			 4702285 as activist_code_id, -- from ot2020_vansync.tsm_csi_activistcodes (4702285 = Out of State Supporter)
+       4702285 as activist_code_id, -- from ot2020_vansync.tsm_csi_activistcodes (4702285 = Out of State Supporter)
        'Apply' as action,
        4 as input_type_id, -- from ot2020_vansync.tsm_csi_inputtypes (4 = Bulk)
        78 as contact_type_id, --from ot2020_vansync.tsm_csi_contacttypes (78 = No Actual Contact)
