@@ -1,3 +1,6 @@
+-- Attempting to match VPC records to MyC & push these cell phones.
+
+
 -- First: create table of all VPC records assigned to OT2020
 -- using select statement:
 
