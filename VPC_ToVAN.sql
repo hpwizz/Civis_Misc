@@ -72,3 +72,34 @@ on t1.vanid = t2.myv_vanid
 -- Started point checking records
 -- And the names in the VPC table don't match the names in the VAN tables
 -- The problem seems to be coming from joining to VAN using analytics_mi.person's vb_smartvan_id field
+
+
+
+
+----------------------------------------------------------------------------------------------
+
+-- added join with ref.activity_regions_mi to pull MyC vanid; only 705 match with a MyC vanid / 615 hav cell phones
+
+  select a.statefileid,
+	b.vb_voterbase_id,
+  	b.vb_smartvan_id, -- MyV vanid
+  	c.vanid, -- MyC vanid
+	a.fullname,
+    a.regdeliveryaddrline,
+    a.regaddrcity,
+    a.regaddrzip5,
+    a.assign_phone_prime_chase,
+    a.likely_cell_phone,
+    a.likely_land_phone
+from cvi_vbm_app_chase.michigan_200611_phones a
+
+left join analytics_mi.person b -- gives us MyV vanid
+  on a.statefileid = b.vb_voterid
+  
+left join ref.activity_regions_mi c -- gives us MyC vanid
+  on b.vb_smartvan_id = c.myv_vanid
+
+where a.partner_prime_chase = 'OT2020'
+  and b.vb_smartvan_id is not null -- MyV vanid
+  and c.vanid is not null -- MyC vanid
+  and a.likely_cell_phone is not null
